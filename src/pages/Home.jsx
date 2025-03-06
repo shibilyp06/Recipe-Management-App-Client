@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Header from '../components/Header';
 import axiosInstance from '../api/axios';
 
@@ -16,6 +18,7 @@ const Home = () => {
         setRecipes(response.data);
       } catch (error) {
         console.error('Error fetching recipes:', error);
+        toast.error('Failed to fetch recipes');
       }
     };
 
@@ -33,10 +36,10 @@ const Home = () => {
       setTitle('');
       setIngredients('');
       setSteps('');
-      alert('Recipe added successfully!');
+      toast.success('Recipe added successfully!');
     } catch (error) {
       console.error('Error adding recipe:', error);
-      alert('Failed to add recipe');
+      toast.error('Failed to add recipe');
     }
   };
 
@@ -47,6 +50,7 @@ const Home = () => {
   return (
     <>
       <Header />
+      <ToastContainer />
       <div className="max-w-3xl mx-auto p-6 font-sans">
         <header className="text-center mb-10">
           <h1 className="text-4xl text-gray-800">Recipe Management Website</h1>
